@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: blueviolet;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav-item {
+  display: inline-block;
+}
+
+.nav-link {
+  text-decoration: none;
+  padding: 10px;
+  color: #fff;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-link--active {
+  padding: 10px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.btn {
+  background-color: red;
+  padding: 2px;
+}
