@@ -5,7 +5,7 @@ import './Layout.css';
 
 export const Layout: FC = () => {
   return (
-    <div className='layout'>
+    <div className="layout">
       <Header />
       <div className="container">
         <Outlet />
