@@ -5,8 +5,8 @@ import { User } from '../../types';
 
 // Define a type for the slice state
 interface UserState {
-  user: User | null
-  isAuth: boolean
+  user: User | null;
+  isAuth: boolean;
 }
 
 // Define the initial state using that type

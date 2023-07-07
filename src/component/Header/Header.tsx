@@ -50,10 +50,7 @@ export const Header: FC = () => {
       )}
 
       {isAuth ? (
-        <button
-          className="btn"
-          onClick={logOutHandler}
-        >
+        <button className="btn" onClick={logOutHandler}>
           <span>Log Out</span>
           {/* <FaSignOutAlt /> */}
         </button>
