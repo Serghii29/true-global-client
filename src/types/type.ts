@@ -22,3 +22,10 @@ export interface ResponeUserData {
   token: string;
   user: ResponeUser;
 }
+
+export interface Category {
+  id: number;
+  dateCreated: string;
+  name: string;
+  userId: number;
+}
