@@ -30,7 +30,7 @@ export const Auth: FC = () => {
         setTokenToLocalStorage('token', data.access_token);
         dispatch(login(data));
         toast.success('You loged in!');
-        navigate('/');
+        navigate('/categories');
       }
     } catch (error: any) {
       const messageForError = error.response.data.message;
