@@ -5,9 +5,9 @@ import './CategoryModal.css';
 
 type Props = {
   type: 'post' | 'patch';
-   category: Category | undefined;
-   setVisibleModal: (isVisible: boolean) => void;
-}
+  category: Category | undefined;
+  setVisibleModal: (isVisible: boolean) => void;
+};
 
 export const CategoryModal: FC<Props> = ({
   type,
@@ -15,26 +15,19 @@ export const CategoryModal: FC<Props> = ({
   setVisibleModal,
 }) => {
   return (
-    <div className='category-modal'>
-      <Form className='category-modal--form'>
-        <label
-          htmlFor="name"
-          className='category-modal--label'
-        >
-          <small className='category-modal--header'>
+    <div className="category-modal">
+      <Form className="category-modal--form">
+        <label htmlFor="name" className="category-modal--label">
+          <small className="category-modal--header">
             {type === 'post'
-              ? (
-                'Add new category'
-              )
-              : (
-                `Edit ${category?.name} category`
-              )}
+              ? 'Add new category'
+              : `Edit ${category?.name} category`}
           </small>
-          <span className='category-modal--input-header'>name</span>
+          <span className="category-modal--input-header">name</span>
           <input
             type="text"
-            name='name'
-            className='category-modal--input'
+            name="name"
+            className="category-modal--input"
             placeholder={type === 'post' ? 'Title..' : category?.name}
           />
         </label>

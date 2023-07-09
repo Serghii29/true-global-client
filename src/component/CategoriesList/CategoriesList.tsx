@@ -31,8 +31,7 @@ export const CategoriesList: FC = () => {
   const type = 'category';
 
   return (
-    <div className='categories-list'>
-
+    <div className="categories-list">
       <Add type={type} />
 
       {categories.map((category) => (

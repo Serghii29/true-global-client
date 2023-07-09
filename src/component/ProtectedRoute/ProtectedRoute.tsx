@@ -4,7 +4,7 @@ import './ProtectedRoute.css';
 
 type Props = {
   children: React.JSX.Element;
-}
+};
 
 export const ProtectedRoute: FC<Props> = ({ children }) => {
   const isAuth = useAppSelector((state) => state.user.isAuth);
@@ -14,7 +14,7 @@ export const ProtectedRoute: FC<Props> = ({ children }) => {
       {isAuth ? (
         children
       ) : (
-        <div className='route-massage'>
+        <div className="route-massage">
           <h1>If you see this page, you must to register</h1>
         </div>
       )}
