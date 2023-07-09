@@ -14,9 +14,9 @@ export const Home: FC = () => {
     <>
       <h1>Home</h1>
 
-     <CategoriesList />
+      <CategoriesList />
 
-     <CategoryModal
+      <CategoryModal
         type={'patch'}
         category={category}
         setVisibleModal={() => {}}
