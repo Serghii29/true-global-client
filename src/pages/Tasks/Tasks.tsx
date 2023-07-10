@@ -1,5 +1,8 @@
 import { FC } from 'react';
+import { TaskList } from '../../component/TasksList';
 
 export const Tasks: FC = () => {
-  return <h1>Tasks</h1>;
+  return (
+    <TaskList />
+  );
 };

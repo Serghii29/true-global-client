@@ -32,10 +32,12 @@ export const CategoriesList: FC = () => {
 
   return (
     <div className="categories-list">
-      <Add type={type} />
+      <div className='categories-list--add-container'>
+        <Add type={type} />
+      </div>
 
       {categories.map((category) => (
-        <CategoryItem category={category} />
+        <CategoryItem key={category.id} category={category} />
       ))}
     </div>
   );

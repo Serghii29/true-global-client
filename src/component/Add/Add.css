@@ -1,6 +1,5 @@
 .button-add {
-  position: relative;
-  left: 74%;
+  float: right;
   padding: 10px 60px;
   background: rgb(19, 15, 15);
   border: none;
