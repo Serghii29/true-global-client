@@ -32,7 +32,7 @@ export const CategoriesList: FC = () => {
 
   return (
     <div className="categories-list">
-      <div className='categories-list--add-container'>
+      <div className="categories-list--add-container">
         <Add type={type} />
       </div>
 

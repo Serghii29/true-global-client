@@ -8,13 +8,13 @@ export const TaskList: FC = () => {
 
   return (
     <div className="task-list">
-      <div className='task-list--header'>
+      <div className="task-list--header">
         <span>Category</span>
 
         <Add type={type} />
       </div>
 
-      <div className='task-item-container'>
+      <div className="task-item-container">
         <TaskItem />
         <TaskItem />
         <TaskItem />
