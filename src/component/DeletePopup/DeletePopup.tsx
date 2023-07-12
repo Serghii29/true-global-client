@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { deleteCategoryAsync } from '../../store/category/categorySlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { visibleModalDelete } from '../../store/modal/modalSlice';
+import { deleteTaskAsync } from '../../store/task/taskSlice';
 import './DeletePopup.css';
 
 type Props = {
@@ -9,11 +10,16 @@ type Props = {
 };
 
 export const DeletePopup: FC<Props> = ({ type }) => {
-  const { categoryId } = useAppSelector((state) => state.modal);
+  const { categoryId, taskId } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteCategoryAsync(categoryId));
+    if (type === 'category') {
+      dispatch(deleteCategoryAsync(categoryId));
+    } else {
+      dispatch(deleteTaskAsync(taskId));
+    }
+
     dispatch(visibleModalDelete(false));
   };
 

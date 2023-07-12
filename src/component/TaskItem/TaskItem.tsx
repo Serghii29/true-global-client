@@ -1,24 +1,43 @@
 import { FC } from 'react';
+import { useAppDispatch } from '../../store/hooks';
+import { addTaskId, visibleModalDelete } from '../../store/modal/modalSlice';
+import { Task } from '../../types';
 import './TaskItem.css';
 
-export const TaskItem: FC = () => {
+type Props = {
+  task: Task;
+};
+
+export const TaskItem: FC<Props> = ({ task }) => {
+  // eslint-disable-next-line no-shadow
+  const { id, name, dateStart, dateEnd } = task;
+
+  const dispatch = useAppDispatch();
+
+  const handleDelete = () => {
+    dispatch(addTaskId(id));
+    dispatch(visibleModalDelete(true));
+  };
+
   return (
     <div className="task-container">
-      <h3>Fix phone input field</h3>
+      <h3>{name}</h3>
 
       <div className="task-data">
         <span>Start date</span>
-        <span>16.07.2023</span>
+        <span>{dateStart}</span>
       </div>
 
       <div className="task-data">
         <span>End date</span>
-        <span>22.07.2023</span>
+        <span>{dateEnd}</span>
       </div>
 
       <div className="task-button-container">
-        <button className="task-action button--red">delete</button>
-        <button className="task-action action--edit button--green">edit</button>
+        <button className="task-action button--red" onClick={handleDelete}>
+          Delete
+        </button>
+        <button className="task-action action--edit button--green">Edit</button>
       </div>
     </div>
   );
