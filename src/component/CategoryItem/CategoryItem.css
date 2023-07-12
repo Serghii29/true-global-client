@@ -55,4 +55,9 @@
 
 .actions-menu--item {
   padding: 10px;
+  cursor: pointer;
+}
+
+.actions-menu--item:hover {
+  color: rgba(255, 255, 255, 0.5);
 }

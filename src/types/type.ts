@@ -29,3 +29,8 @@ export interface Category {
   name: string;
   userId: number;
 }
+
+export enum MethodType {
+  'post',
+  'putch',
+}
