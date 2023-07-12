@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../store/hooks';
 import {
   addCategoryId,
@@ -19,6 +20,7 @@ export const CategoryItem: FC<Props> = ({ category }) => {
   const [isActionsOpen, setIsActionsOpen] = useState(false);
 
   const dispath = useAppDispatch();
+  const navigate = useNavigate();
 
   const preparedDate = dateCreated.slice(0, 10);
 
@@ -43,7 +45,10 @@ export const CategoryItem: FC<Props> = ({ category }) => {
     };
   }, []);
 
-  const handleMoreClick = () => {};
+  const handleMoreClick = () => {
+    dispath(addCategoryId(id));
+    navigate('/tasks');
+  };
 
   const handleEdit = () => {
     dispath(putchMethod());

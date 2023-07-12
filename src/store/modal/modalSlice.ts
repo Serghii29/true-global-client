@@ -5,14 +5,18 @@ export interface ModalState {
   method: MethodType;
   isVisibleModal: boolean;
   isVisibleModalDelete: boolean;
+  isVisibleModalAddTask: boolean;
   categoryId: number;
+  taskId: number;
 }
 
 const initialState: ModalState = {
   method: MethodType.post,
   isVisibleModal: false,
   isVisibleModalDelete: false,
+  isVisibleModalAddTask: false,
   categoryId: 0,
+  taskId: 0,
 };
 
 export const modalSlice = createSlice({
@@ -31,8 +35,14 @@ export const modalSlice = createSlice({
     visibleModalDelete: (state, action: PayloadAction<boolean>) => {
       state.isVisibleModalDelete = action.payload;
     },
+    visibleModalAddTask: (state, action: PayloadAction<boolean>) => {
+      state.isVisibleModalAddTask = action.payload;
+    },
     addCategoryId: (state, action: PayloadAction<number>) => {
       state.categoryId = action.payload;
+    },
+    addTaskId: (state, action: PayloadAction<number>) => {
+      state.taskId = action.payload;
     },
   },
 });
@@ -43,6 +53,8 @@ export const {
   visibleModal,
   addCategoryId,
   visibleModalDelete,
+  visibleModalAddTask,
+  addTaskId,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

@@ -34,3 +34,26 @@ export enum MethodType {
   'post',
   'putch',
 }
+
+export interface Task {
+  id: number;
+  name: string;
+  description: string;
+  dateStart: string;
+  dateEnd: string;
+  categoryId: number;
+}
+
+export interface TaskDataCreate {
+  name: string;
+  description: string;
+  dateStart: string;
+  dateEnd: string;
+}
+
+export interface TaskDataUpdate {
+  name?: string;
+  description?: string;
+  dateStart?: string;
+  dateEnd?: string;
+}
