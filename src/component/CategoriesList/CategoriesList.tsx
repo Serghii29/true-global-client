@@ -1,44 +1,37 @@
-import { FC } from 'react';
-import { Category } from '../../types';
+import { FC, useEffect } from 'react';
+import { categoriesAsync } from '../../store/category/categorySlice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { Add } from '../Add';
 import { CategoryItem } from '../CategoryItem';
+import { CategoryModal } from '../CategoryModal';
+import { DeletePopup } from '../DeletePopup';
 import './CategoriesList.css';
 
 export const CategoriesList: FC = () => {
-  const categories: Category[] = [
-    {
-      id: 1,
-      dateCreated: '08-07-2023',
-      name: 'develop',
-      userId: 1,
-    },
+  const { categories } = useAppSelector((state) => state.categories);
+  const { isVisibleModal, isVisibleModalDelete } = useAppSelector(
+    (state) => state.modal,
+  );
 
-    {
-      id: 1,
-      dateCreated: '08-07-2023',
-      name: 'develop',
-      userId: 1,
-    },
+  const dispatch = useAppDispatch();
 
-    {
-      id: 1,
-      dateCreated: '08-07-2023',
-      name: 'develop',
-      userId: 1,
-    },
-  ];
-
-  const type = 'category';
+  useEffect(() => {
+    dispatch(categoriesAsync());
+  }, []);
 
   return (
     <div className="categories-list">
       <div className="categories-list--add-container">
-        <Add type={type} />
+        <Add type={'category'} />
       </div>
 
       {categories.map((category) => (
         <CategoryItem key={category.id} category={category} />
       ))}
+
+      {isVisibleModal && <CategoryModal />}
+
+      {isVisibleModalDelete && <DeletePopup type="category" />}
     </div>
   );
 };
