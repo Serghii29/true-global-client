@@ -8,23 +8,30 @@ import { login } from '../../store/user/userSlice';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 export const Auth: FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  // eslint-disable-next-line no-shadow
-  const [name, setName] = useState('');
   const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
 
-  const loginHandler = async(e: React.FormEvent<HTMLFormElement>) => {
-    try {
-      e.preventDefault();
+  const loginSchema = yup.object().shape({
+    email: yup.string().email('Invalid email').required('Email is required'),
+    password: yup.string().required('Password is required'),
+  });
 
-      const data = await AuthService.login({
-        email,
-        password,
-      });
+  const registrationSchema = yup.object().shape({
+    email: yup.string().email('Invalid email').required('Email is required'),
+    password: yup
+      .string()
+      .required('Password is required')
+      .min(8, 'Password should be of minimum 8 characters length'),
+    name: yup.string().required('Name is required'),
+  });
+
+  const handleLogin = async(value: any) => {
+    try {
+      const data = await AuthService.login(value);
 
       if (data) {
         setTokenToLocalStorage('token', data.access_token);
@@ -41,15 +48,9 @@ export const Auth: FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const registrationHandler = async(e: React.FormEvent<HTMLFormElement>) => {
+  const handleRegistration = async(value: any) => {
     try {
-      e.preventDefault();
-
-      const data = await AuthService.registration({
-        email,
-        password,
-        name,
-      });
+      const data = await AuthService.registration(value);
 
       if (data) {
         toast.success('Account has been created');
@@ -62,34 +63,67 @@ export const Auth: FC = () => {
     }
   };
 
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      name: '',
+    },
+    validationSchema: isLogin ? loginSchema : registrationSchema,
+    onSubmit: (values: any) => {
+      if (isLogin) {
+        handleLogin(values);
+      } else {
+        handleRegistration(values);
+      }
+    },
+  });
+
+  const {
+    handleSubmit,
+    handleChange,
+    values: formValues,
+    errors,
+    handleBlur,
+  } = formik;
+
   return (
     <div className="login">
       <h1>{isLogin ? 'Login' : 'Registration'}</h1>
-      <form
-        className="form"
-        onSubmit={isLogin ? loginHandler : registrationHandler}
-      >
+      <form className="form" onSubmit={handleSubmit}>
         <TextField
           fullWidth
-          type="text"
-          placeholder="email"
-          value={email}
-          onChange={({ target }) => setEmail(target.value)}
+          id="email"
+          name="email"
+          label="Email"
+          value={formValues.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={formik.touched.email && Boolean(errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
         />
         <TextField
           fullWidth
+          id="password"
+          name="password"
+          label="Password"
           type="password"
-          placeholder="password"
-          value={password}
-          onChange={({ target }) => setPassword(target.value)}
+          value={formValues.password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={formik.touched.password && Boolean(errors.password)}
+          helperText={formik.touched.password && errors.password}
         />
         {!isLogin && (
           <TextField
             fullWidth
             type="text"
             placeholder="name"
-            value={name}
-            onChange={({ target }) => setName(target.value)}
+            value={formValues.name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={formik.touched.name && Boolean(errors.name)}
+            helperText={formik.touched.name && errors.name}
           />
         )}
 
