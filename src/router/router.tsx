@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { ProtectedRoute } from '../component/ProtectedRoute';
 import { Auth } from '../pages/Auth';
+// import { Auth } from '../pages/Auth';
 import { Categories } from '../pages/Categories';
 import { ErrorPage } from '../pages/ErrorPage';
 import { Home } from '../pages/Home';
