@@ -12,7 +12,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-basis: 50%;
+  flex-basis: 60%;
+}
+
+.category-item-title {
+  width: 30%;
+}
+
+.category-item-amount {
+  width: 30%;
+}
+
+.category-item-date {
+  width: 30%;
 }
 
 .category-item--button-container {

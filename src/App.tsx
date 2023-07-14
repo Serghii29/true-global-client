@@ -12,7 +12,7 @@ function App() {
   const dispatch = useAppDispatch();
 
   const verificationAuth = async() => {
-    const token = getTokenFromLocalStorage();
+    const token = getTokenFromLocalStorage('token');
 
     try {
       if (token) {

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { getTokenFromLocalStorage } from '../../helpers/localStorage.helper';
 import { deleteCategoryAsync } from '../../store/category/categorySlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { visibleModalDelete } from '../../store/modal/modalSlice';
@@ -10,8 +11,10 @@ type Props = {
 };
 
 export const DeletePopup: FC<Props> = ({ type }) => {
-  const { categoryId, taskId } = useAppSelector((state) => state.modal);
+  const { taskId } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
+
+  const categoryId = +getTokenFromLocalStorage('categoryId');
 
   const handleDelete = () => {
     if (type === 'category') {

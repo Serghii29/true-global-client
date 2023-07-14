@@ -49,6 +49,7 @@ export interface TaskDataCreate {
   description: string;
   dateStart: string;
   dateEnd: string;
+  category: Category | null;
 }
 
 export interface TaskDataUpdate {
@@ -56,4 +57,5 @@ export interface TaskDataUpdate {
   description?: string;
   dateStart?: string;
   dateEnd?: string;
+  category?: Category | null;
 }

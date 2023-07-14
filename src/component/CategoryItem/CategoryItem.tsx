@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { client } from '../../api/axios.api';
+import { setTokenToLocalStorage } from '../../helpers/localStorage.helper';
 import { useAppDispatch } from '../../store/hooks';
 import {
-  addCategoryId,
   putchMethod,
   visibleModal,
   visibleModalDelete,
@@ -17,6 +18,7 @@ type Props = {
 export const CategoryItem: FC<Props> = ({ category }) => {
   // eslint-disable-next-line no-shadow
   const { id, name, dateCreated } = category;
+  const [tasksCount, setTasksCount] = useState(0);
   const [isActionsOpen, setIsActionsOpen] = useState(false);
 
   const dispath = useAppDispatch();
@@ -26,7 +28,7 @@ export const CategoryItem: FC<Props> = ({ category }) => {
 
   const handleActionsToggle = () => {
     setIsActionsOpen(!isActionsOpen);
-    dispath(addCategoryId(id));
+    setTokenToLocalStorage('categoryId', id.toString());
   };
 
   const menuRef = useRef<HTMLDivElement>(null);
@@ -46,7 +48,8 @@ export const CategoryItem: FC<Props> = ({ category }) => {
   }, []);
 
   const handleMoreClick = () => {
-    dispath(addCategoryId(id));
+    setTokenToLocalStorage('categoryId', id.toString());
+    setTokenToLocalStorage('categoryName', name);
     navigate('/tasks');
   };
 
@@ -61,13 +64,23 @@ export const CategoryItem: FC<Props> = ({ category }) => {
     setIsActionsOpen(false);
   };
 
+  const handleTaskCount = async() => {
+    const data = await client.get<number>(`count/${id}`);
+
+    setTasksCount(data);
+  };
+
+  useEffect(() => {
+    handleTaskCount();
+  }, []);
+
   return (
     <div className="category-item">
       <div className="category-item-details">
-        <p>{name}</p>
-        <p>11 tasks</p>
+        <p className="category-item-title">{name}</p>
+        <p className="category-item-amount">{`${tasksCount} tasks`}</p>
 
-        <p>{preparedDate}</p>
+        <p className="category-item-date">{preparedDate}</p>
       </div>
 
       <div className="category-item--button-container">

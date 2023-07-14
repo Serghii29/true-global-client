@@ -1,6 +1,11 @@
 import { FC } from 'react';
 import { useAppDispatch } from '../../store/hooks';
-import { addTaskId, visibleModalDelete } from '../../store/modal/modalSlice';
+import {
+  addTaskId,
+  putchMethod,
+  visibleModalAddTask,
+  visibleModalDelete,
+} from '../../store/modal/modalSlice';
 import { Task } from '../../types';
 import './TaskItem.css';
 
@@ -17,6 +22,12 @@ export const TaskItem: FC<Props> = ({ task }) => {
   const handleDelete = () => {
     dispatch(addTaskId(id));
     dispatch(visibleModalDelete(true));
+  };
+
+  const handleEdit = () => {
+    dispatch(addTaskId(id));
+    dispatch(visibleModalAddTask(true));
+    dispatch(putchMethod());
   };
 
   return (
@@ -37,7 +48,12 @@ export const TaskItem: FC<Props> = ({ task }) => {
         <button className="task-action button--red" onClick={handleDelete}>
           Delete
         </button>
-        <button className="task-action action--edit button--green">Edit</button>
+        <button
+          className="task-action action--edit button--green"
+          onClick={handleEdit}
+        >
+          Edit
+        </button>
       </div>
     </div>
   );
