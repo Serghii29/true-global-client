@@ -65,7 +65,7 @@ export const CategoryItem: FC<Props> = ({ category }) => {
   };
 
   const handleTaskCount = async() => {
-    const data = await client.get<number>(`count/${id}`);
+    const data = await client.get<number>(`tasks/count/${id}`);
 
     setTasksCount(data);
   };
