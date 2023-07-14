@@ -6,6 +6,8 @@ import { setTokenToLocalStorage } from '../../helpers/localStorage.helper';
 import { useAppDispatch } from '../../store/hooks';
 import { login } from '../../store/user/userSlice';
 import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 export const Auth: FC = () => {
   const [email, setEmail] = useState('');
@@ -14,8 +16,6 @@ export const Auth: FC = () => {
   const [name, setName] = useState('');
   const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
-
-  const dispatch = useAppDispatch();
 
   const loginHandler = async(e: React.FormEvent<HTMLFormElement>) => {
     try {
@@ -30,7 +30,7 @@ export const Auth: FC = () => {
         setTokenToLocalStorage('token', data.access_token);
         dispatch(login(data));
         toast.success('You loged in!');
-        navigate('/categories');
+        navigate('/');
       }
     } catch (error: any) {
       const messageForError = error.response.data.message;
@@ -38,6 +38,8 @@ export const Auth: FC = () => {
       toast.error(messageForError.toString());
     }
   };
+
+  const dispatch = useAppDispatch();
 
   const registrationHandler = async(e: React.FormEvent<HTMLFormElement>) => {
     try {
@@ -67,20 +69,23 @@ export const Auth: FC = () => {
         className="form"
         onSubmit={isLogin ? loginHandler : registrationHandler}
       >
-        <input
+        <TextField
+          fullWidth
           type="text"
           placeholder="email"
           value={email}
           onChange={({ target }) => setEmail(target.value)}
         />
-        <input
+        <TextField
+          fullWidth
           type="password"
           placeholder="password"
           value={password}
           onChange={({ target }) => setPassword(target.value)}
         />
         {!isLogin && (
-          <input
+          <TextField
+            fullWidth
             type="text"
             placeholder="name"
             value={name}
@@ -88,7 +93,9 @@ export const Auth: FC = () => {
           />
         )}
 
-        <button className="form-submit">Submit</button>
+        <Button color="primary" variant="contained" fullWidth type="submit">
+          Submit
+        </Button>
       </form>
 
       <div className="button-container">

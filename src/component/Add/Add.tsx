@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useAppDispatch } from '../../store/hooks';
 import {
+  postMethod,
   visibleModal,
   visibleModalAddTask,
 } from '../../store/modal/modalSlice';
@@ -16,6 +17,8 @@ export const Add: FC<Props> = ({ type }) => {
   const isCategory = type === 'category';
 
   const handleAdd = () => {
+    dispath(postMethod());
+
     if (isCategory) {
       dispath(visibleModal(true));
     } else {

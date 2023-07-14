@@ -20,7 +20,7 @@ const initialState: CategoryState = {
 
 export const categoriesAsync = createAsyncThunk(
   'categories/fetchCategories',
-  async() => {
+  async () => {
     try {
       const data = client.get<Category[]>('/categories');
 
@@ -30,12 +30,12 @@ export const categoriesAsync = createAsyncThunk(
 
       toast.error(messageForError.toString());
     }
-  },
+  }
 );
 
 export const addCategoryAsync = createAsyncThunk(
   'categories/addCategory',
-  async(title: string) => {
+  async (title: string) => {
     try {
       const data = client.post<Category>('/categories', { title });
 
@@ -45,12 +45,12 @@ export const addCategoryAsync = createAsyncThunk(
 
       toast.error(messageForError.toString());
     }
-  },
+  }
 );
 
 export const updateCategoryAsync = createAsyncThunk(
   'categories/updateCategory',
-  async({ categoryId, title }: fetchParam) => {
+  async ({ categoryId, title }: fetchParam) => {
     try {
       client.patch<Category>(`/categories/${categoryId}`, { title });
 
@@ -60,12 +60,12 @@ export const updateCategoryAsync = createAsyncThunk(
 
       toast.error(messageForError.toString());
     }
-  },
+  }
 );
 
 export const deleteCategoryAsync = createAsyncThunk(
   'categories/deleteCategory',
-  async(categoryId: number) => {
+  async (categoryId: number) => {
     try {
       const data = client.delete<Category>(`/categories/${categoryId}`);
 
@@ -75,7 +75,7 @@ export const deleteCategoryAsync = createAsyncThunk(
 
       toast.error(messageForError.toString());
     }
-  },
+  }
 );
 
 export const categoriesSlice = createSlice({
@@ -118,7 +118,7 @@ export const categoriesSlice = createSlice({
           const { categoryId, title } = action.payload;
 
           const category = state.categories.find(
-            (item) => item.id === categoryId,
+            (item) => item.id === categoryId
           );
 
           if (category) {
@@ -136,7 +136,7 @@ export const categoriesSlice = createSlice({
         state.loading = false;
 
         state.categories = state.categories.filter(
-          (category) => category.id !== action.payload?.id,
+          (category) => category.id !== action.payload?.id
         );
       })
       .addCase(deleteCategoryAsync.rejected, (state) => {

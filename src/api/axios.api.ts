@@ -4,7 +4,7 @@ import { getTokenFromLocalStorage } from '../helpers/localStorage.helper';
 export const instance = axios.create({
   baseURL: 'http://localhost:3333/api',
   headers: {
-    Authorization: 'Bearer ' + getTokenFromLocalStorage(),
+    Authorization: 'Bearer ' + getTokenFromLocalStorage('token'),
   },
 });
 
@@ -12,7 +12,6 @@ export const client = {
   async get<T>(url: string) {
     const response = await instance.get<T>(url);
 
-    // no need to run `response.json()` data is already prepared
     return response.data;
   },
 

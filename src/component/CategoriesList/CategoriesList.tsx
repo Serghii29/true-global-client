@@ -29,9 +29,11 @@ export const CategoriesList: FC = () => {
         <CategoryItem key={category.id} category={category} />
       ))}
 
-      {isVisibleModal && <CategoryModal />}
+      {isVisibleModal && !isVisibleModalDelete && <CategoryModal />}
 
-      {isVisibleModalDelete && <DeletePopup type="category" />}
+      {isVisibleModalDelete && !isVisibleModal && (
+        <DeletePopup type="category" />
+      )}
     </div>
   );
 };

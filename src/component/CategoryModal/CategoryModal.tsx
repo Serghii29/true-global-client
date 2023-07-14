@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { Form } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { client } from '../../api/axios.api';
+import { getTokenFromLocalStorage } from '../../helpers/localStorage.helper';
 import {
   addCategoryAsync,
   updateCategoryAsync,
@@ -14,11 +15,10 @@ import './CategoryModal.css';
 export const CategoryModal: FC = () => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState<Category | null>(null);
-  const { method, isVisibleModal, categoryId } = useAppSelector(
-    (state) => state.modal,
-  );
+  const { method, isVisibleModal } = useAppSelector((state) => state.modal);
 
   const isMethod = method === MethodType.post;
+  const categoryId = +getTokenFromLocalStorage('categoryId');
 
   const dispath = useAppDispatch();
 
